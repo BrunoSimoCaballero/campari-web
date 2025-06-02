@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Planilla Campari Web</title>
+  <style>
+    body {
+      background-color: #d3d3d3;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .arrows {
+      display: flex;
+      flex-direction: column;
+    }
+    .arrows button {
+      font-size: 18px;
+      padding: 5px;
+      margin: 2px;
+      cursor: pointer;
+    }
+    .dias label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #4a772f;
+      color: white;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Planilla Campari</h2>
+
+  <div class="controls">
+    <div class="arrows">
+      <button onclick="scrollUp()">▲</button>
+      <button onclick="scrollDown()">▼</button>
+    </div>
+    <div class="dias">
+      <label><input type="radio" name="dia" value="LUNES" onchange="filterTable()"> LUNES</label>
+      <label><input type="radio" name="dia" value="MARTES" onchange="filterTable()"> MARTES</label>
+      <label><input type="radio" name="dia" value="MIERCOLES" onchange="filterTable()"> MIERCOLES</label>
+      <label><input type="radio" name="dia" value="JUEVES" onchange="filterTable()"> JUEVES</label>
+      <label><input type="radio" name="dia" value="VIERNES" onchange="filterTable()"> VIERNES</label>
+      <label><input type="radio" name="dia" value="SABADO" checked onchange="filterTable()"> SABADO</label>
+    </div>
+  </div>
+
+  <table id="tablaCampari">
+    <thead>
+      <tr>
+        <th>Cuenta</th>
+        <th>Razón Social</th>
+        <th>Domicilio</th>
+        <th>Día</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <!-- Datos de ejemplo -->
+      <tr data-dia="SABADO"><td>400853</td><td>AGÜERO 1278 SA</td><td>Int. Agüero 1278 ESQ CHARCAS</td><td>SABADO</td></tr>
+      <tr data-dia="SABADO"><td>401008</td><td>GUO PING</td><td>Grito de Alcorta 1137</td><td>SABADO</td></tr>
+      <tr data-dia="VIERNES"><td>401015</td><td>TENG AIQING</td><td>Pres. Alessandri 1273</td><td>VIERNES</td></tr>
+      <tr data-dia="LUNES"><td>401020</td><td>LIN LIQIN</td><td>Pola 931</td><td>LUNES</td></tr>
+      <tr data-dia="MARTES"><td>401105</td><td>YAN CHUNYUN</td><td>Int. Agüero 1737</td><td>MARTES</td></tr>
+      <tr data-dia="JUEVES"><td>401155</td><td>MARIA CELESTE</td><td>San Francisco 1068</td><td>JUEVES</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    let scrollIndex = 0;
+    const visibleRows = 4;
+    const tbody = document.getElementById("tbody");
+    const rows = Array.from(tbody.rows);
+
+    function filterTable() {
+      const dia = document.querySelector('input[name="dia"]:checked').value;
+      scrollIndex = 0;
+      rows.forEach(row => {
+        row.style.display = (row.dataset.dia === dia) ? "" : "none";
+      });
+      applyScroll();
+    }
+
+    function applyScroll() {
+      const visible = rows.filter(r => r.style.display !== "none");
+      visible.forEach((row, i) => {
+        row.classList.toggle("hidden", i < scrollIndex || i >= scrollIndex + visibleRows);
+      });
+    }
+
+    function scrollUp() {
+      scrollIndex = Math.max(0, scrollIndex - 1);
+      applyScroll();
+    }
+
+    function scrollDown() {
+      const visible = rows.filter(r => r.style.display !== "none");
+      if (scrollIndex + visibleRows < visible.length) {
+        scrollIndex++;
+        applyScroll();
+      }
+    }
+
+    // Inicializar vista
+    window.onload = filterTable;
+  </script>
+</body>
+</html>
