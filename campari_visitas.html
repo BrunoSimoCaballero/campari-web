@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Campari Visitas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d3d3d3;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+    }
+    .dias label {
+      margin-right: 15px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+    }
+    th {
+      background-color: #4a772f;
+      color: white;
+      padding: 8px;
+      text-align: center;
+    }
+    td {
+      padding: 6px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    .x { color: red; font-weight: bold; }
+    .check { color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <strong>P07</strong>
+      <input type="text" value="Maricel Mengarelli" />
+    </div>
+    <div class="dias">
+      <label><input type="radio" name="dia"> Lunes</label>
+      <label><input type="radio" name="dia"> Martes</label>
+      <label><input type="radio" name="dia"> Miércoles</label>
+      <label><input type="radio" name="dia"> Jueves</label>
+      <label><input type="radio" name="dia"> Viernes</label>
+      <label><input type="radio" name="dia" checked> Sábado</label>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cuenta</th>
+        <th>Razón Social</th>
+        <th>Domicilio</th>
+        <th>Campari</th>
+        <th>Cinzano</th>
+        <th>Aperol</th>
+        <th>Sky Clásico</th>
+        <th>Sky Infusión</th>
+        <th>Cynar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>400853</td>
+        <td>AGÜERO 1278 SA</td>
+        <td>Int. Agüero 1278 ESQ CHARCAS</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+      </tr>
+      <tr>
+        <td>401008</td>
+        <td>GUO PING</td>
+        <td>Grito de Alcorta 1137</td>
+        <td class="check">✔1</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+        <td class="check">✔1</td>
+        <td class="x">✘0</td>
+        <td class="x">✘0</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
